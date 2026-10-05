@@ -7,6 +7,7 @@ It works with ChatGPT, Claude, Gemini, Grok, and Cursor, plus any other MCP clie
 - Site: https://continuitywriter.com
 - Setup: https://continuitywriter.com/connect
 - MCP address: `https://continuitywriter.com/mcp`
+- Logo: https://continuitywriter.com/logo.jpg
 
 Sign in with your Continuity account when the assistant opens OAuth. Do not paste an API key or password into a header. Story tools need Pro or an active trial. The site offers a 14-day trial. The live pricing page does not print a dollar amount, so this page does not invent one.
 

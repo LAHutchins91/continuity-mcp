@@ -10,5 +10,11 @@
       "type": "streamable-http",
       "url": "https://continuitywriter.com/mcp"
     }
+  ],
+  "icons": [
+    {
+      "src": "https://continuitywriter.com/logo.jpg",
+      "mimeType": "image/jpeg"
+    }
   ]
 }
