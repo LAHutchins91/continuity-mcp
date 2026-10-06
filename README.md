@@ -52,3 +52,7 @@ claude mcp add --transport http continuity https://continuitywriter.com/mcp
 Other clients: add the same URL, choose OAuth, and leave client id and secret empty. Continuity supports dynamic client registration. Full steps for each assistant are on the connect page.
 
 Registry metadata for this remote server is in `server.json` (`io.github.LAHutchins91/continuity`).
+
+---
+
+More from Ouroboros: https://ouroborosapps.com
