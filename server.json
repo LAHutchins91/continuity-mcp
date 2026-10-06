@@ -3,7 +3,7 @@
   "name": "io.github.LAHutchins91/continuity",
   "title": "Continuity",
   "description": "Private story bible for fiction writers, shared with AI assistants over MCP.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "websiteUrl": "https://continuitywriter.com",
   "remotes": [
     {
@@ -16,5 +16,10 @@
       "src": "https://continuitywriter.com/logo.jpg",
       "mimeType": "image/jpeg"
     }
-  ]
+  ],
+  "repository": {
+    "url": "https://github.com/LAHutchins91/continuity-mcp",
+    "source": "github",
+    "id": "1398785019"
+  }
 }
