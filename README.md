@@ -6,6 +6,7 @@ It also works with Gemini and any other MCP client that supports Streamable HTTP
 
 - Site: https://continuitywriter.com
 - Setup: https://continuitywriter.com/connect
+- Docs: https://ouroborosapps.com/docs/continuity
 - MCP address: `https://continuitywriter.com/mcp`
 - Logo: https://continuitywriter.com/logo.jpg
 
