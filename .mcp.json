@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "continuity": {
+      "type": "http",
+      "url": "https://continuitywriter.com/mcp"
+    }
+  }
+}

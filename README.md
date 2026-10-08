@@ -52,9 +52,28 @@ claude mcp add --transport http continuity https://continuitywriter.com/mcp
 
 Other clients: add the same URL, choose OAuth, and leave client id and secret empty. Continuity supports dynamic client registration. Full steps for each assistant are on the connect page.
 
+Grok Build: install the `ouroboros-continuity` plugin from the plugin marketplace, then sign in when the browser opens.
+
 Registry metadata for this remote server is in `server.json` (`io.github.LAHutchins91/continuity`).
 
-This repo is also a Cursor plugin: `.cursor-plugin/plugin.json` plus `mcp.json` at the root, with the `story-bible` skill in `skills/`.
+## Plugin contents
+
+This repo is a plugin for Grok Build and Cursor, published by Ouroboros Apps:
+
+- Grok Build: `.grok-plugin/plugin.json` plus `.mcp.json`
+- Cursor: `.cursor-plugin/plugin.json` plus `mcp.json`
+- One skill: `skills/story-bible/SKILL.md` (instructions only, no scripts)
+- One remote MCP server, `continuity`, over Streamable HTTP
+
+The plugin has no hooks, commands, agents, or LSP servers, and it runs no code on your machine. The `src/` folder and `Dockerfile` are MCP server source, published for reference and registry container checks. When someone runs that code as a server, it reads its own server settings (database and billing keys) from that server's environment. The plugin does not build, install, or run it, and nothing in this repo runs on install (no `postinstall` or other lifecycle scripts).
+
+## Network endpoints and credentials
+
+- `https://continuitywriter.com/mcp` is the only MCP endpoint. Story tools read and write the story projects in your own Continuity account.
+- Sign-in uses OAuth 2.1 with dynamic client registration. Protected resource metadata is at `https://continuitywriter.com/.well-known/oauth-protected-resource`. The authorization server it lists is Continuity's account service, hosted on Supabase (`https://kufinkiktgnnhusuenjq.supabase.co/auth/v1`). Your browser opens it when you sign in.
+- Credentials: your Continuity account, through that browser sign-in. The plugin needs no API key, environment variables, or local files, and it does not read any.
+- Requests without a valid token get `401 Unauthorized`.
+- Privacy: https://continuitywriter.com/privacy. Support: https://continuitywriter.com/support. Contact: ouroborosplugins@gmail.com.
 
 ---
 

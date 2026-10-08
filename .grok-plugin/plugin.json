@@ -1,0 +1,23 @@
+{
+  "name": "ouroboros-continuity",
+  "displayName": "Continuity by Ouroboros Apps",
+  "version": "0.5.2",
+  "description": "Continuity by Ouroboros Apps is a story bible and series memory for fiction writers, via the hosted Continuity MCP server at continuitywriter.com. Keep characters, places, timelines and plot facts consistent across chats. Sign in with your Continuity account on first connect (OAuth); no API key.",
+  "author": {
+    "name": "Ouroboros Apps",
+    "email": "ouroborosplugins@gmail.com",
+    "url": "https://ouroborosapps.com"
+  },
+  "homepage": "https://continuitywriter.com",
+  "repository": "https://github.com/LAHutchins91/continuity-mcp",
+  "license": "MIT",
+  "keywords": [
+    "continuity writer",
+    "continuitywriter",
+    "continuity story bible",
+    "continuity series bible",
+    "continuity canon",
+    "ouroboros continuity"
+  ],
+  "logo": "logo.jpg"
+}
