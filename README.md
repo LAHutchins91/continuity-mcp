@@ -1,15 +1,15 @@
 # Continuity
 
-Continuity is a private story bible for fiction. It keeps characters, relationships, world rules, timelines, and approved scenes, then lets an assistant read that canon before it writes.
+Continuity keeps your project facts across chats. It's a story bible for fiction writers: your characters, places, timelines and plot facts stay consistent while you write in ChatGPT, Claude, Grok or Cursor.
 
-It works with ChatGPT, Claude, Gemini, Grok, and Cursor, plus any other MCP client that can do Streamable HTTP and OAuth. It is not a ChatGPT-only plugin.
+It also works with Gemini and any other MCP client that supports Streamable HTTP and OAuth. Made by Ouroboros (https://ouroborosapps.com).
 
 - Site: https://continuitywriter.com
 - Setup: https://continuitywriter.com/connect
 - MCP address: `https://continuitywriter.com/mcp`
 - Logo: https://continuitywriter.com/logo.jpg
 
-Sign in with your Continuity account when the assistant opens OAuth. Do not paste an API key or password into a header. Story tools need Pro or an active trial. The site offers a 14-day trial. The live pricing page does not print a dollar amount, so this page does not invent one.
+Sign in with your Continuity account when the assistant opens OAuth. Do not paste an API key or password into a header. Story tools need an active Continuity account; see https://continuitywriter.com for details.
 
 ## What the assistant can do
 
@@ -52,6 +52,8 @@ claude mcp add --transport http continuity https://continuitywriter.com/mcp
 Other clients: add the same URL, choose OAuth, and leave client id and secret empty. Continuity supports dynamic client registration. Full steps for each assistant are on the connect page.
 
 Registry metadata for this remote server is in `server.json` (`io.github.LAHutchins91/continuity`).
+
+This repo is also a Cursor plugin: `.cursor-plugin/plugin.json` plus `mcp.json` at the root, with the `story-bible` skill in `skills/`.
 
 ---
 

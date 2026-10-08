@@ -1,0 +1,22 @@
+{
+  "name": "continuity",
+  "displayName": "Continuity by Ouroboros",
+  "version": "0.5.1",
+  "description": "Continuity keeps your project facts across chats. It's a story bible for fiction writers: your characters, places, timelines and plot facts stay consistent while you write in ChatGPT, Claude, Grok or Cursor.",
+  "author": {
+    "name": "Ouroboros"
+  },
+  "homepage": "https://continuitywriter.com",
+  "repository": "https://github.com/LAHutchins91/continuity-mcp",
+  "license": "MIT",
+  "keywords": [
+    "story bible",
+    "fiction writing",
+    "continuity",
+    "canon",
+    "memory",
+    "mcp"
+  ],
+  "logo": "logo.jpg",
+  "publisher": "Ouroboros"
+}
