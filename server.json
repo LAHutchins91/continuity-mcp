@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.LAHutchins91/continuity",
-  "title": "Continuity",
-  "description": "Private story bible for fiction writers, shared with AI assistants over MCP.",
-  "version": "0.5.1",
+  "title": "Continuity by Ouroboros Apps",
+  "description": "Story continuity, novel memory, and series bible for fiction writers, shared with AI assistants",
+  "version": "0.5.2",
   "websiteUrl": "https://continuitywriter.com",
   "remotes": [
     {
