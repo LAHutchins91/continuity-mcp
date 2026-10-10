@@ -1,5 +1,7 @@
 # Continuity
 
+[![M8ven Verified](https://m8ven.ai/badge/mcp/lahutchins91/continuity-mcp?variant=verified)](https://m8ven.ai/mcp/lahutchins91/continuity-mcp?s=readme)
+
 Continuity keeps your project facts across chats. It's a story bible for fiction writers: your characters, places, timelines and plot facts stay consistent while you write in ChatGPT, Claude, Grok or Cursor.
 
 It also works with Gemini and any other MCP client that supports Streamable HTTP and OAuth. Made by Ouroboros (https://ouroborosapps.com).
