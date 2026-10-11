@@ -10,6 +10,7 @@ import { createStoryServer } from "./story-tools.js";
 import { validateMcpClaims } from "./mcp-claims.js";
 import { MCP_CORS_HEADERS, ensureStreamableHttpAccept, mcpBrowserOriginAllowed } from "./mcp-clients.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { isOwnCheckout, isOwnSubscription } from "./stripe-scope.js";
 
 export const app = express();
 export default app;
@@ -128,7 +129,8 @@ app.post("/billing/webhook", express.raw({ type: "application/json" }), async (r
     const event = stripeEvent(req.body, signature);
     const object = event.data.object;
 
-    if (event.type === "checkout.session.completed") {
+    // Every app on the shared Stripe account receives every event; act only on our own.
+    if (event.type === "checkout.session.completed" && isOwnCheckout(object, APP_BASE_URL)) {
       const userId = typeof object.client_reference_id === "string" ? object.client_reference_id : undefined;
       if (userId) {
         await updateBillingProfile(userId, {
@@ -138,7 +140,7 @@ app.post("/billing/webhook", express.raw({ type: "application/json" }), async (r
       }
     }
 
-    if (["customer.subscription.created", "customer.subscription.updated", "customer.subscription.deleted"].includes(event.type)) {
+    if (["customer.subscription.created", "customer.subscription.updated", "customer.subscription.deleted"].includes(event.type) && isOwnSubscription(object, [STRIPE_PRICE_MONTHLY, STRIPE_PRICE_YEARLY])) {
       const metadata = (object.metadata ?? {}) as JsonObject;
       const userId = typeof metadata.supabase_user_id === "string" ? metadata.supabase_user_id : undefined;
       if (userId) {
