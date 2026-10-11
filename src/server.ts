@@ -8,7 +8,7 @@ import { landingConnectLead } from "./connect-page.js";
 import { installPublicPages, page } from "./public-pages.js";
 import { createStoryServer } from "./story-tools.js";
 import { validateMcpClaims } from "./mcp-claims.js";
-import { MCP_CORS_HEADERS, mcpBrowserOriginAllowed } from "./mcp-clients.js";
+import { MCP_CORS_HEADERS, ensureStreamableHttpAccept, mcpBrowserOriginAllowed } from "./mcp-clients.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 export const app = express();
@@ -643,7 +643,7 @@ app.options("/mcp", (req, res) => {
   res.status(204).end();
 });
 
-app.post("/mcp", async (req, res) => {
+app.post("/mcp", ensureStreamableHttpAccept, async (req, res) => {
   if (!guardMcpOrigin(req, res)) return;
   if(!allowPublic('mcp:'+req.ip,300,60000))return res.status(429).set('Retry-After','60').json({error:'Too many requests. Retry in one minute.'});
   let server: McpServer | undefined;
