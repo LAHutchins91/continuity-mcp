@@ -8,7 +8,7 @@ import { landingConnectLead } from "./connect-page.js";
 import { installPublicPages, page } from "./public-pages.js";
 import { createStoryServer } from "./story-tools.js";
 import { validateMcpClaims } from "./mcp-claims.js";
-import { MCP_CORS_HEADERS, mcpBrowserOriginAllowed } from "./mcp-clients.js";
+import { MCP_CORS_HEADERS, ensureStreamableHttpAccept, mcpBrowserOriginAllowed } from "./mcp-clients.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 export const app = express();
@@ -643,7 +643,7 @@ app.options("/mcp", (req, res) => {
   res.status(204).end();
 });
 
-app.post("/mcp", async (req, res) => {
+app.post("/mcp", ensureStreamableHttpAccept, async (req, res) => {
   if (!guardMcpOrigin(req, res)) return;
   if(!allowPublic('mcp:'+req.ip,300,60000))return res.status(429).set('Retry-After','60').json({error:'Too many requests. Retry in one minute.'});
   let server: McpServer | undefined;
@@ -683,8 +683,24 @@ app.post("/mcp", async (req, res) => {
     if (!res.headersSent) res.status(500).json({ error: "Unable to process the plugin request." });
   }
 });
-app.get("/mcp", (req, res) => {
+// Streamable HTTP: this server answers POST only and offers no GET event stream.
+// Signed-out GETs keep the OAuth challenge so clients can discover sign-in.
+// Signed-in GETs get 405 (MCP transport spec) instead of a 401 that tells a
+// connected client its fresh token is bad (seen with Abacus.AI ChatLLM).
+app.get("/mcp", async (req, res) => {
   if (!guardMcpOrigin(req, res)) return;
+  const hasBearer = Boolean(bearer(req));
+  console.log(JSON.stringify({ event: "mcp_get", has_bearer: hasBearer, ua: String(req.header("user-agent") ?? "").slice(0, 120) }));
+  if (hasBearer) {
+    try {
+      const auth = await authenticatedUser(req);
+      validateMcpClaims(auth.token,auth.user.id,`${SUPABASE_URL}/auth/v1`,`${APP_BASE_URL}/mcp`);
+      if(!await supabaseRequest<boolean>('/rest/v1/rpc/verify_continuity_connection',{method:'POST',body:'{}'},auth.token))throw Error('Connection revoked');
+      return res.status(405).set("Allow", "POST").json({ error: "This server does not offer a GET event stream. Use Streamable HTTP POST." });
+    } catch {
+      // fall through to the OAuth challenge
+    }
+  }
   res.set("WWW-Authenticate", `Bearer resource_metadata="${APP_BASE_URL}/.well-known/oauth-protected-resource/mcp"`);
   res.status(401).json({ error: "Use Streamable HTTP POST with your Continuity connection." });
 });
